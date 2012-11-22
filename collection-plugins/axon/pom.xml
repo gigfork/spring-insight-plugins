@@ -30,6 +30,28 @@
 		</repository>
 	</repositories>
 
+	<!-- NOTE: by default we deploy only 1.5 compiled artifacts, but this plugin 
+		works only with 1.6 so deploy it anyway -->
+	<profiles>
+		<profile>
+			<id>force-deploy-artifacts</id>
+			<activation>
+				<jdk>[1.6,)</jdk>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-deploy-plugin</artifactId>
+						<configuration>
+							<skip>false</skip>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 	<dependencies>
 
 		<!-- Provided dependencies (part of the user application) -->
@@ -85,6 +107,17 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<configuration>
+					<rules>
+						<requireJavaVersion>
+							<version>[1.6,)</version>
+						</requireJavaVersion>
+					</rules>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
 					<archive>
@@ -92,7 +125,7 @@
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 						</manifest>
 						<manifestEntries>
-							<Insight-Plugin-Descriptor>org.axonframeowrk.insight.plugin.axon.AxonPluginRuntimeDescriptor</Insight-Plugin-Descriptor>
+							<Insight-Plugin-Descriptor>org.axonframework.insight.plugin.axon.AxonPluginRuntimeDescriptor</Insight-Plugin-Descriptor>
 						</manifestEntries>
 					</archive>
 				</configuration>
