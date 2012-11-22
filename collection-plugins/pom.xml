@@ -30,6 +30,7 @@
     </profiles>
 
 	<modules>
+		<module>axon</module>
 		<module>eclipse-persistence</module>
 		<module>ehcache</module>
 		<module>ejb3</module>
