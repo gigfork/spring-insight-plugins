@@ -30,7 +30,7 @@ import com.springsource.insight.collection.test.OperationCollectionAspectTestSup
 import com.springsource.insight.intercept.operation.Operation;
 import com.springsource.insight.intercept.operation.OperationMap;
 
-public class EventHandlerOperationCollectionAspectTests extends OperationCollectionAspectTestSupport {
+public class EventHandlerOperationCollectionAspectTest extends OperationCollectionAspectTestSupport {
     
     @Test
     public void annotatedEventHandlerOperationCollected() {
@@ -38,7 +38,7 @@ public class EventHandlerOperationCollectionAspectTests extends OperationCollect
         
         Operation op = getLastEntered();
 
-        assertEquals("org.axonframework.insight.plugin.axon.EventHandlerOperationCollectionAspectTests$TestEvent", op.get("eventType"));
+        assertEquals("org.axonframework.insight.plugin.axon.EventHandlerOperationCollectionAspectTest$TestEvent", op.get("eventType"));
         assertEquals("handleEvent", op.getSourceCodeLocation().getMethodName());
     }
     
@@ -51,7 +51,7 @@ public class EventHandlerOperationCollectionAspectTests extends OperationCollect
         
         Operation op = getLastEntered();
 
-        assertEquals("org.axonframework.insight.plugin.axon.EventHandlerOperationCollectionAspectTests$TestEvent", op.get("eventType"));
+        assertEquals("org.axonframework.insight.plugin.axon.EventHandlerOperationCollectionAspectTest$TestEvent", op.get("eventType"));
         assertEquals("handle", op.getSourceCodeLocation().getMethodName());
         OperationMap map = op.get("metaData", OperationMap.class);
         assertNotNull("EventMessage metadata missing in operation", map);

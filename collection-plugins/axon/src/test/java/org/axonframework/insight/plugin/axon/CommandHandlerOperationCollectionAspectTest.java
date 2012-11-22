@@ -30,7 +30,7 @@ import com.springsource.insight.collection.test.OperationCollectionAspectTestSup
 import com.springsource.insight.intercept.operation.Operation;
 import com.springsource.insight.intercept.operation.OperationMap;
 
-public class CommandHandlerOperationCollectionAspectTests extends OperationCollectionAspectTestSupport {
+public class CommandHandlerOperationCollectionAspectTest extends OperationCollectionAspectTestSupport {
     
     @Test
     public void annotatedCommandHandlerOperationCollected() {
@@ -38,20 +38,20 @@ public class CommandHandlerOperationCollectionAspectTests extends OperationColle
         
         Operation op = getLastEntered();
 
-        assertEquals("org.axonframework.insight.plugin.axon.CommandHandlerOperationCollectionAspectTests$TestCommand", op.get("commandType"));
+        assertEquals("org.axonframework.insight.plugin.axon.CommandHandlerOperationCollectionAspectTest$TestCommand", op.get("commandType"));
         assertEquals("handleCommand", op.getSourceCodeLocation().getMethodName());
     }
     
     @Test
     public void commandHandlerOperationCollected() throws Throwable {
         new TestCommandHandler().handle(
-                new GenericCommandMessage<CommandHandlerOperationCollectionAspectTests.TestCommand>(
+                new GenericCommandMessage<CommandHandlerOperationCollectionAspectTest.TestCommand>(
                         new TestCommand(), Collections.singletonMap("someKey", (Object) "someValue")),
                 new DefaultUnitOfWork());
         
         Operation op = getLastEntered();
 
-        assertEquals("org.axonframework.insight.plugin.axon.CommandHandlerOperationCollectionAspectTests$TestCommand", op.get("commandType"));
+        assertEquals("org.axonframework.insight.plugin.axon.CommandHandlerOperationCollectionAspectTest$TestCommand", op.get("commandType"));
         assertEquals("handle", op.getSourceCodeLocation().getMethodName());
         OperationMap map = op.get("metaData", OperationMap.class);
         assertNotNull("CommandMessage metadata missing in operation", map);

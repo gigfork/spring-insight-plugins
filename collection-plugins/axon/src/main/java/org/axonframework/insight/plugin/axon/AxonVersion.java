@@ -26,9 +26,9 @@ import com.springsource.insight.util.ClassUtil;
  */
 public class AxonVersion {
 
-    static boolean IS_AXON_1X;
+    final static boolean IS_AXON_1X;
 
     static {
-    	IS_AXON_1X = ClassUtil.isPresent("org.axonframework.domain.Event");
+    	IS_AXON_1X = ClassUtil.isPresent("org.axonframework.domain.Event", AxonVersion.class);
     }
 }

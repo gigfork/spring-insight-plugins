@@ -35,7 +35,7 @@ import com.springsource.insight.intercept.trace.FrameUtil;
  */
 public abstract class AbstractHandlerEndPointAnalyzer extends AbstractSingleTypeEndpointAnalyzer {
 	
-	public AbstractHandlerEndPointAnalyzer(OperationType handlerOp) {
+	protected AbstractHandlerEndPointAnalyzer(OperationType handlerOp) {
 		super(handlerOp);
 	}
 	

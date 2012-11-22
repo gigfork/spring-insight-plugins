@@ -14,15 +14,15 @@
   <insight:operation-group group="Axon Handlers" operation="saga_operation" />
 
   <insight:operation-view operation="command_bus_dispatch"
-                          template="org/axonframework/insight/command_bus_dispatch.ftl" />
+                          template="org/axonframework/insight/plugin/axon/command_bus_dispatch.ftl" />
   <insight:operation-view operation="command_handler_operation"
-                          template="org/axonframework/insight/command_handler_operation.ftl" />
+                          template="org/axonframework/insight/plugin/axon/command_handler_operation.ftl" />
   <insight:operation-view operation="event_bus_publish"
-                          template="org/axonframework/insight/event_bus_publish.ftl" />
+                          template="org/axonframework/insight/plugin/axon/event_bus_publish.ftl" />
   <insight:operation-view operation="event_handler_operation"
-                          template="org/axonframework/insight/event_handler_operation.ftl" />
+                          template="org/axonframework/insight/plugin/axon/event_handler_operation.ftl" />
   <insight:operation-view operation="saga_operation"
-                          template="org/axonframework/insight/saga_operation.ftl" />
+                          template="org/axonframework/insight/plugin/axon/saga_operation.ftl" />
 
   <bean id="axonCommandHandlerEndPointAnalyzer"
   		class="org.axonframework.insight.plugin.axon.CommandHandlerEndPointAnalyzer"
@@ -36,5 +36,11 @@
   		class="org.axonframework.insight.plugin.axon.SagaOperationEndPointAnalyzer"
   		factory-method="getInstance"
   		lazy-init="true"/>
+  		
+  <bean id="axonPluginRuntimeDescriptor"
+          class="org.axonframework.insight.plugin.axon.AxonPluginRuntimeDescriptor"
+          factory-method="getInstance"
+          lazy-init="true"
+        />
 
 </beans>
