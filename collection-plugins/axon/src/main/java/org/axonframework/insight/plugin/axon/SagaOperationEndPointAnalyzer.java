@@ -1,11 +1,11 @@
-/*
- * Copyright (c) 2010-2012. Axon Framework
+/**
+ * Copyright (c) 2009-2011 VMware, Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,15 +16,15 @@
 
 package org.axonframework.insight.plugin.axon;
 
+import static com.springsource.insight.intercept.operation.OperationFields.CLASS_NAME;
+import static com.springsource.insight.intercept.operation.OperationFields.METHOD_NAME;
+import static com.springsource.insight.intercept.operation.OperationFields.SHORT_CLASS_NAME;
+
+import com.springsource.insight.intercept.endpoint.AbstractSingleTypeEndpointAnalyzer;
 import com.springsource.insight.intercept.endpoint.EndPointAnalysis;
-import com.springsource.insight.intercept.endpoint.EndPointAnalyzer;
 import com.springsource.insight.intercept.endpoint.EndPointName;
 import com.springsource.insight.intercept.operation.Operation;
 import com.springsource.insight.intercept.trace.Frame;
-import com.springsource.insight.intercept.trace.FrameUtil;
-import com.springsource.insight.intercept.trace.Trace;
-
-import static com.springsource.insight.intercept.operation.OperationFields.*;
 
 /**
  * Analyzer for Axon Saga operations.
@@ -32,23 +32,25 @@ import static com.springsource.insight.intercept.operation.OperationFields.*;
  * @author Joris Kuipers
  * @since 2.0
  */
-public class SagaOperationEndPointAnalyzer implements EndPointAnalyzer {
+public class SagaOperationEndPointAnalyzer extends AbstractSingleTypeEndpointAnalyzer {
+	
+	private SagaOperationEndPointAnalyzer() {
+		super(AxonOperationType.SAGA);
+	}
 
-    public EndPointAnalysis locateEndPoint(Trace trace) {
-        Frame handlerFrame = trace.getFirstFrameOfType(AxonOperationType.SAGA);
-        if (handlerFrame == null) return null;
-        
-        Operation handlerOp = handlerFrame.getOperation();
-        if (handlerOp == null) return null;
-        
-        EndPointName endPointName = EndPointName.valueOf(
-            handlerOp.get(CLASS_NAME) + "#" + handlerOp.get(METHOD_NAME));
-        
-        return new EndPointAnalysis(handlerFrame.getRange(),
-                                    endPointName,
-                                    handlerOp.getLabel(),
-                                    "SAGA: " + handlerOp.get(SHORT_CLASS_NAME),
-                                    FrameUtil.getDepth(handlerFrame));
+	private static final SagaOperationEndPointAnalyzer INSTANCE = new SagaOperationEndPointAnalyzer();
+
+	public static final SagaOperationEndPointAnalyzer getInstance() {
+    	return INSTANCE;
     }
+	
+	@Override
+	protected EndPointAnalysis makeEndPoint(Frame frame, int depth) {
+		Operation op = frame.getOperation();
+		String example = "SAGA: " + op.get(SHORT_CLASS_NAME);
+		EndPointName endPointName = EndPointName.valueOf(op.get(CLASS_NAME) + "#" + op.get(METHOD_NAME));
+
+		return new EndPointAnalysis(endPointName, op.getLabel(), example, getOperationScore(op, depth), op);
+	}
 
 }

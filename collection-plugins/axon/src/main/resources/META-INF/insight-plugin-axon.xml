@@ -24,8 +24,17 @@
   <insight:operation-view operation="saga_operation"
                           template="org/axonframework/insight/saga_operation.ftl" />
 
-  <bean class="org.axonframework.insight.plugin.axon.CommandHandlerEndPointAnalyzer"/>
-  <!--<bean class="org.axonframework.insight.plugin.axon.EventHandlerEndPointAnalyzer"/>-->
-  <bean class="org.axonframework.insight.plugin.axon.SagaOperationEndPointAnalyzer"/>
+  <bean id="axonCommandHandlerEndPointAnalyzer"
+  		class="org.axonframework.insight.plugin.axon.CommandHandlerEndPointAnalyzer"
+  		factory-method="getInstance"
+  		lazy-init="true"/>
+  <!--<bean id="axonEventHandlerEndPointAnalyzer" 
+  			class="org.axonframework.insight.plugin.axon.EventHandlerEndPointAnalyzer"
+  			factory-method="getInstance"
+  			lazy-init="true"/>-->
+  <bean id ="axonorg.axonframework.insight.plugin.axon.SagaOperationEndPointAnalyzer" 
+  		class="org.axonframework.insight.plugin.axon.SagaOperationEndPointAnalyzer"
+  		factory-method="getInstance"
+  		lazy-init="true"/>
 
 </beans>
