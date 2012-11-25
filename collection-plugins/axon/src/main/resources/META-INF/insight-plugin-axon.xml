@@ -28,11 +28,11 @@
   		class="org.axonframework.insight.plugin.axon.CommandHandlerEndPointAnalyzer"
   		factory-method="getInstance"
   		lazy-init="true"/>
-  <!--<bean id="axonEventHandlerEndPointAnalyzer" 
-  			class="org.axonframework.insight.plugin.axon.EventHandlerEndPointAnalyzer"
-  			factory-method="getInstance"
-  			lazy-init="true"/>-->
-  <bean id ="axonorg.axonframework.insight.plugin.axon.SagaOperationEndPointAnalyzer" 
+  <bean id="axonEventHandlerEndPointAnalyzer" 
+  		class="org.axonframework.insight.plugin.axon.EventHandlerEndPointAnalyzer"
+  		factory-method="getInstance"
+  		lazy-init="true"/>
+  <bean id ="sagaOperationEndPointAnalyzer" 
   		class="org.axonframework.insight.plugin.axon.SagaOperationEndPointAnalyzer"
   		factory-method="getInstance"
   		lazy-init="true"/>

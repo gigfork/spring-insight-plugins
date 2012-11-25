@@ -33,7 +33,7 @@ public class ExposedAxonPluginSpringBeanTest
      */
 	@Autowired(required=false) protected AxonPluginRuntimeDescriptor axonPluginRuntimeDescriptor;
 	@Autowired(required=false) protected CommandHandlerEndPointAnalyzer commandHandlerEndPointAnalyzer;
-	//@Autowired(required=false) protected EventHandlerEndPointAnalyzer eventHandlerEndPointAnalyzer;
+	@Autowired(required=false) protected EventHandlerEndPointAnalyzer eventHandlerEndPointAnalyzer;
 	@Autowired(required=false) protected SagaOperationEndPointAnalyzer sagaOperationEndPointAnalyzer;
 
 	public ExposedAxonPluginSpringBeanTest() {
