@@ -57,7 +57,7 @@ public class JdbcOperationExternalResourceAnalyzerTest extends AbstractDatabaseJ
 		
 		Collection<ApplicationName> apps = analyzer.getDisabledApplicationNames();
 		assertEquals("Total disabled apps", 1, apps.size());
-		assertTrue(appName + "is known when disabled", analyzer.isAppllicationNameKnown(appName));
+		assertTrue(appName + "is known when disabled", analyzer.isApplicationNameKnown(appName));
 		
 		ApplicationName disabledAppName = ListUtil.getFirstMember(apps);
 		assertEquals("The only disabled app", appName, disabledAppName);
@@ -67,7 +67,7 @@ public class JdbcOperationExternalResourceAnalyzerTest extends AbstractDatabaseJ
 		
 		apps = analyzer.getDisabledApplicationNames();
 		assertTrue("Total disabled apps is empty", apps.isEmpty());
-		assertTrue(appName + "is known when enabled", analyzer.isAppllicationNameKnown(appName));
+		assertTrue(appName + "is known when enabled", analyzer.isApplicationNameKnown(appName));
 	}
 	
 	@Test
@@ -91,7 +91,7 @@ public class JdbcOperationExternalResourceAnalyzerTest extends AbstractDatabaseJ
 		assertSame("first descriptor type", ExternalResourceType.DATABASE, type);
 		assertFalse("first descriptor is a parent", firstDescriptor.isParent());
 		
-		assertTrue(trace.getAppName() + "is known", analyzer.isAppllicationNameKnown(trace.getAppName()));
+		assertTrue(trace.getAppName() + "is known", analyzer.isApplicationNameKnown(trace.getAppName()));
 	}
 	
 	@Test
@@ -118,7 +118,7 @@ public class JdbcOperationExternalResourceAnalyzerTest extends AbstractDatabaseJ
 		assertSame("first descriptor type", ExternalResourceType.DATABASE, type);
 		assertFalse("first descriptor is a parent", firstDescriptor.isParent());
 		
-		assertTrue(trace.getAppName() + "is known", analyzer.isAppllicationNameKnown(trace.getAppName()));
+		assertTrue(trace.getAppName() + "is known", analyzer.isApplicationNameKnown(trace.getAppName()));
 	}
 	
 	@Test
@@ -141,7 +141,7 @@ public class JdbcOperationExternalResourceAnalyzerTest extends AbstractDatabaseJ
 		assertNotNull("external resource descriptors list", resources);
 		assertEquals("total external resource descriptors", 2, resources.size());
 		
-		assertTrue(trace.getAppName() + "is known", analyzer.isAppllicationNameKnown(trace.getAppName()));
+		assertTrue(trace.getAppName() + "is known", analyzer.isApplicationNameKnown(trace.getAppName()));
 		
 		int totalDbs = 0;
 		int totalQuerys = 0;
@@ -195,7 +195,7 @@ public class JdbcOperationExternalResourceAnalyzerTest extends AbstractDatabaseJ
 		assertSame("first descriptor type", ExternalResourceType.DATABASE, type);
 		assertFalse("first descriptor is a parent", firstDescriptor.isParent());
 		
-		assertTrue(trace.getAppName() + "is known", analyzer.isAppllicationNameKnown(trace.getAppName()));
+		assertTrue(trace.getAppName() + "is known", analyzer.isApplicationNameKnown(trace.getAppName()));
 	}
 	
 	private void assertInitialState() {

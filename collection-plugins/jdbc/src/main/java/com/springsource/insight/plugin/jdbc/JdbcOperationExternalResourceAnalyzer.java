@@ -38,19 +38,18 @@ import com.springsource.insight.util.ListUtil;
 import com.springsource.insight.util.StringUtil;
 
 /**
- * 
+ * Creates DB external resources and if needed will also create a QUERY external resources as children
  */
 public class JdbcOperationExternalResourceAnalyzer extends DatabaseJDBCURIAnalyzer implements CollectionSettingsUpdateListener {
     public static final OperationType   TYPE=OperationType.valueOf("jdbc");
     
-    public static final String GENERATE_STR     = "generate-query-external-resource";
+    public static final String PLUGINS          = "plugins";
+    public static final String GENERATE_STR     = JdbcRuntimePluginDescriptor.PLUGIN_NAME + ".generate-query-external-resource";
     public static final String GENERATE_APP_STR = GENERATE_STR + ".application";
     
-    public static final CollectionSettingName CS_NAME = new CollectionSettingName(GENERATE_STR + ".active", 
-    																					JdbcRuntimePluginDescriptor.PLUGIN_NAME);
+    public static final CollectionSettingName CS_NAME = new CollectionSettingName(GENERATE_STR + ".active", PLUGINS);
     
-    public static final CollectionSettingName APP_CS_NAME = new CollectionSettingName(GENERATE_APP_STR, 
-																						JdbcRuntimePluginDescriptor.PLUGIN_NAME);
+    public static final CollectionSettingName APP_CS_NAME = new CollectionSettingName(GENERATE_APP_STR, PLUGINS);
     
     public static final String APP_KEY_NAME = APP_CS_NAME.getKey() + ".";
     
@@ -202,7 +201,7 @@ public class JdbcOperationExternalResourceAnalyzer extends DatabaseJDBCURIAnalyz
 	static CollectionSettingName createApplicationCollectionSettingName(ApplicationName appName) {
 		CollectionSettingName name = new CollectionSettingName(
 												GENERATE_APP_STR + "." + appName.getName(), 
-												JdbcRuntimePluginDescriptor.PLUGIN_NAME);
+												PLUGINS);
 		return name;
 	}
 	
@@ -222,7 +221,7 @@ public class JdbcOperationExternalResourceAnalyzer extends DatabaseJDBCURIAnalyz
 		return Collections.unmodifiableCollection(knownApps);
 	}
 	
-	public final boolean isAppllicationNameKnown(ApplicationName appName) {
+	public final boolean isApplicationNameKnown(ApplicationName appName) {
 		return knownApps.contains(appName);
 	}
 }
