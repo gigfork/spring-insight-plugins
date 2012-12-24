@@ -134,7 +134,11 @@
 				<groupId>com.mycila.maven-license-plugin</groupId>
 				<artifactId>maven-license-plugin</artifactId>
 				<configuration>
-					<header>../../aslHeader.txt</header>
+					<strictCheck>true</strictCheck>
+					<header>aslHeader.txt</header>
+					<properties>
+						<year>2010-2012</year>
+					</properties>
 				</configuration>
 			</plugin>
 		</plugins>
